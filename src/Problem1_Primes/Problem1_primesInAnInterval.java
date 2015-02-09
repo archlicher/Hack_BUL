@@ -53,6 +53,5 @@ public class Problem1_primesInAnInterval {
             }
             System.out.println(primes.toString());
         }
-
     }
 }
