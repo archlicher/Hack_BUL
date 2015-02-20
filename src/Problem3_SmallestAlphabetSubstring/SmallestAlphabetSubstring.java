@@ -1,18 +1,11 @@
 package Problem3_SmallestAlphabetSubstring;
 
 public class SmallestAlphabetSubstring {
-    public static final char[] ALPHABET = {'a','b','c','d','e','f','g','h',
+    private static final char[] ALPHABET = {'a','b','c','d','e','f','g','h',
                                             'i','j','k','l','m','n','o','p',
                                             'q','r','s','t','u','v','w','x',
                                             'y','z'};
-    public static int lengthOfString = 26;
-
-    public static boolean isValidString(String str) {
-        if(str.length()>26) {
-            return true;
-        }
-        return false;
-    }
+    private static int lengthOfString = 26;
 
     public static String resultString(String str, int lengthToCheck){
         String result = "";
@@ -25,19 +18,25 @@ public class SmallestAlphabetSubstring {
                     break;
                 }
             }
-            if (result.equals("")){
+            if (result.equals("") && lengthToCheck<str.length()-1){
                 result=resultString(str,++lengthToCheck);
             }
         }
+        if (result.equals("")) return "No alphabet here!";
         return result;
     }
 
     public static String formatResult(String str){
         String formatedResult = resultString(str, lengthOfString);
-        return str.replace(formatedResult, "[" + formatedResult + "]");
+        if(!formatedResult.equals("No alphabet here!")) {
+            return str.replace(formatedResult, "[" + formatedResult + "]");
+        }
+        else {
+            return str;
+        }
     }
 
-    public static String checkForAlphabet(String strToCheck, char[] alphabet){
+    private static String checkForAlphabet(String strToCheck, char[] alphabet){
         String stringToLowerCase = strToCheck.toLowerCase();
         int countLetters =0;
         for(char ch : alphabet) {
@@ -50,6 +49,13 @@ public class SmallestAlphabetSubstring {
             return strToCheck;
         }
         return "";
+    }
+
+    private static boolean isValidString(String str) {
+        if(str.length()>26) {
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args){
